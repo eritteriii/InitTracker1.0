@@ -6,6 +6,21 @@ body {
   font-weight: 400;
   font-style: normal;
 }
+.makeStyles-container-1{
+  justify-content: center;
+}
+.makeStyles-root-288{
+  width: 100vw!important;
+}
+
+.MuiBottomNavigation-root{
+  background-color: rgba(0, 0, 128, 0)!important;
+}
+.bot{
+
+  position: fixed!important;
+  bottom: 0!important;
+}
 a{
   color: #822000!important;
 }
