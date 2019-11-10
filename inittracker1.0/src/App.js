@@ -1,39 +1,32 @@
 import React, {Component}from 'react';
 import './App.css';
-import {Layout, Header, Navigation, Drawer, Content} from "react-mdl";
 import Main from "./components/main";
-import {Link} from "react-router-dom";
-import GameCreate from "./components/game-create/game-create";
-import GameLobby from "./components/game-loby/game-loby";
-import GameSelect from "./components/game-select/game-select";
+// import {Button,Drawer} from "@material-ui/core";
+
 
 class App extends Component {
   render() {
-    return (
-        <div className="demo-big-content">
-          <Layout>
-            <Header className="header-color" title={<Link style={{textDecoration: 'none', color: 'white'}} to="/">Portfolio</Link>} scroll>
-              <Navigation>
-                <Link to="/create">GameCreate</Link>
-                <Link to="/lobby">GameLobby</Link>
-                <Link to="/select">GameSelect</Link>
-              </Navigation>
-            </Header>
-            <Drawer title="Title">
-              <Navigation>
-                <Link to="/create">GameCreate</Link>
-                <Link to="/lobby">GameLobby</Link>
-                <Link to="/select">GameSelect</Link>
-              </Navigation>
-            </Drawer>
-            <Content>
-              <div className="page-content" />
-              <Main/>
-            </Content>
-          </Layout>
-        </div>
-    );
+
+      return (
+                <div>
+                    <h1 className="banner">Init<i className="fas fa-dice-d20"></i>Tracker</h1>
+                    {/*<Button onClick={toggleDrawer('left', true)}>Open Left</Button>*/}
+                    {/*<Drawer anchor="right" open={state.right} onClose={toggleDrawer('right', false)}>*/}
+                    {/*    {sideList('right')}*/}
+                    {/*</Drawer>*/}
+                    {/*/!*<Nav >*!/*/}
+                    {/*/!*    <Nav.Link eventKey={2} href="/create-game">GameCreate</Nav.Link>*!/*/}
+                    {/*/!*    <Nav.Link eventKey={3} href="/game-lobby">GameLobby</Nav.Link>*!/*/}
+                    {/*/!*    <Nav.Link eventKey={4} href="/game-select">GameSelect</Nav.Link>*!/*/}
+                    {/*/!*    <Nav.Link eventKey={5} href="/role-select">RoleSelect</Nav.Link>*!/*/}
+                    {/*/!*</Nav>*!/*/}
+                    <Main/>
+                </div>
+
+
+              );
   }
 }
 
 export default App;
+

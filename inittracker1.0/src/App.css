@@ -1,6 +1,64 @@
-.App {
-  text-align: center;
+body {
+  text-align: center !important;
+  background-image: url("paper-bg.jpg");
+  width: 100vw;
+  font-family: ff-scala-sans-pro, sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
+a{
+  color: #822000!important;
+}
+.MuiFormLabel-root.Mui-focused{
+  color: #822000!important;
+}
+
+#navigation,.Navbar.Toggle {
+  background-image: url("paper-bg.jpg");
+  color: #822000 !important;
+  padding: 0.5rem .5rem!important;
+
+}
+.navbar{
+  justify-content: center!important;
+}
+.navbar-light .navbar-toggler-icon {
+  background-image: url("reddragon.png")!important;
+  width: 3.6em!important;
+  height: 2.5em!important;
+}
+.navbar-light .navbar-brand{
+  color: #822000 !important;
+  font-size: 2.4rem !important;
+  margin: 0!important;
+}
+.navbar-light .navbar-nav .nav-link{
+  color: #822000 !important;
+}
+.navbar-toggler {
+  border-color: rgba(130, 32, 0, .0)!important;
+  box-shadow: none;
+  padding: 0!important;
+}
+
+#d-toggle{
+  justify-content: left!important;
+}
+.banner {
+  font-family: mrs-eaves-roman-small-caps, sans-serif;
+  padding: 15px;
+  font-weight: 600;
+  font-style: normal;
+  color: #822000;
+}
+#play-btn {
+  background-color: #822000;
+}
+
+#dm-btn {
+  background-color: #822000;
+}
+
 
 .App-logo {
   height: 40vmin;
