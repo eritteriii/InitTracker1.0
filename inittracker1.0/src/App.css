@@ -17,7 +17,6 @@ body {
   background-color: rgba(0, 0, 128, 0)!important;
 }
 .bot{
-
   position: fixed!important;
   bottom: 0!important;
 }
@@ -74,7 +73,10 @@ a{
   background-color: #822000;
 }
 
-
+.profilePix{
+  border-radius: 50%;
+  height: 6vh!important;
+}
 .App-logo {
   height: 40vmin;
 }
@@ -92,4 +94,11 @@ a{
 
 .App-link {
   color: #09d3ac;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .MuiBottomNavigation-root{
+    background-color: darkgray!important;
+  }
 }
