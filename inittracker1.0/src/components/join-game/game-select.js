@@ -17,11 +17,7 @@ import io from "socket.io-client";
 import MenuItem from '@material-ui/core/MenuItem';
 import { useHistory } from "react-router-dom";
 
-
 let socket;
-
-
-
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -50,31 +46,43 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+function pullRooms(endpoint, cb) {
 
+    socket = io(endpoint);
+    socket.emit("GetRooms", function (roomArray) {
+        cb(roomArray)
+    });
+}
+
+const Rendershit = (props) =>{
+    if (!Array.isArray(props.roomArray)) return
+    console.log(props.roomArray)
+    return(
+        <>
+            {props.roomArray.map((room, index) =>
+            (
+                    <option key={index} value={room.id}>
+                        {room.name}
+                    </option>
+            ) )}
+        </>
+    )};
 
 export default function GameSelect() {
+    const classes = useStyles();
     const [init, setInitiative] = useState('');
     const [name, setName] = useState('');
-    const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [selectedRoom, setSelectedRoom] = React.useState('');
+    const [rooms, setRooms] = React.useState(null);
     const ENDPOINT = 'http://localhost:5000/';
     let history = useHistory();
 
-    let roomList = [];
-    socket = io(ENDPOINT);
-    socket.emit("GetRooms", function (roomArray) {
-        roomList = roomArray.map((room, index) => {
-            return (
-                <option key={index} value={room.id}>
-                    {room.name}
-                </option>
-            );
-        });
-        console.log(roomArray)
-    });
 
-    let selectedOption;
+    if (rooms === null){
+        pullRooms(ENDPOINT, setRooms)
+    }
+
 
     const handleChange = event => {
         setSelectedRoom(Number(event.target.value) || '');
@@ -88,7 +96,7 @@ export default function GameSelect() {
     };
     const handleJoin = () => {
         // history.push(`/game-lobby?name=${name}&roomid=${selectedRoom}&init=${init}&dm=false`);
-        history.push(`/game-lobby?name=${name}&roomid=1&init=${init}&dm=false`);
+        history.push(`/game-lobby?name=${name}&roomid=1234&init=${init}&dm=false`);
 
     };
 
@@ -146,7 +154,9 @@ export default function GameSelect() {
                                         input={<Input id="demo-dialog-native" />}
                                     >
                                         <option value="" />
-                                        {roomList}
+
+                                            <Rendershit roomArray={rooms} />
+
                                     </Select>
                                 </FormControl>
                             </form>
