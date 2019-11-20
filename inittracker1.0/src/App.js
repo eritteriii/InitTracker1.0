@@ -29,9 +29,9 @@ function Copyright() {
         </Typography>
     );
 }
-function signOut() {
-
-}
+// function signOut() {
+//
+// }
 
 class App extends Component {
     state = { isSignedIn: false };
@@ -73,7 +73,7 @@ class App extends Component {
                     <span>
             <div>Signed In!</div>
             <button onClick={() => firebase.auth().signOut()}>Sign out!</button>
-            <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
+            <h1>{firebase.auth().currentUser.displayName}</h1>
           </span>
                 ) : (
                     <StyledFirebaseAuth

@@ -1,215 +1,152 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Container from '@material-ui/core/Container';
+import React, { useState, useEffect } from "react";
+import queryString from 'query-string';
+import io from "socket.io-client";
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        flexGrow: 1,
-    },
-    paper: {
-        padding: theme.spacing(2),
-        color: theme.palette.text.secondary,
-        boxShadow: "7px 9px .5px #9E9E9E",
-    },
-    text: {
-        fontSize: "6px !important",
-    },
+let socket;
 
-}));
+const GameLobby = ({ location }) => {
+    const [name, setName] = useState('');
+    const [roomid, setRoom] = useState('');
+    const [users, setUsers] = useState('');
+    const [message, setMessage] = useState('');
+    const [messages, setMessages] = useState([]);
+    const ENDPOINT = 'http://localhost:5000/';
+    const [dm, setDm] = useState('');
+    let room_obj = {};
+    let loaded = false;
 
-export default function FullWidthGrid() {
-    const classes = useStyles();
+    useEffect(() => {
+        const { name, roomid, dm} = queryString.parse(location.search);
+
+        socket = io(ENDPOINT);
+
+        setRoom(roomid);
+        setName(name);
+
+        socket.emit('LoadRoom', roomid, (loadedRoom) => {
+            console.log(loadedRoom)
+        });
+    }, [ENDPOINT, location.search]);
+
+    // useEffect(() => {
+    //     socket.on('message', (message) => {
+    //         setMessages([...messages, message ]);
+    //     });
+    //
+    //     socket.on('roomData', ({ users }) => {
+    //         setUsers(users);
+    //     });
+    //
+    //     return () => {
+    //         socket.emit('disconnect');
+    //
+    //         socket.off();
+    //     }
+    // }, [messages]);
+
 
     return (
-        <React.Fragment>
-            <CssBaseline />
-            <Container maxWidth="sm">
-        <div className={classes.root}>
-            <h2>Welcome to the game!</h2>
-            <Grid container spacing={2}>
-                <Grid item xs={3} sm={3}>
-                    <Paper className={classes.paper}><Avatar className={classes.orangeAvatar}>N</Avatar>
-                    </Paper>
-                </Grid>
-                <Grid item xs={5} sm={6}>
-                    <Paper className={classes.paper}>
-                        <p className={classes.text}>PLayer  and Init</p>
-                        <hr/>
-                        <p className={classes.text}>About the player</p>
-                    </Paper>
-                </Grid>
-                <Grid item xs={3} sm={3}>
-                    <Paper className={classes.paper}>
-                        <Grid item>
-                            <IconButton className={classes.button} aria-label="delete">
-                                <DeleteIcon />
-                            </IconButton>
-                        </Grid>
-                    </Paper>
-                </Grid>
-            </Grid>
-            <Grid container spacing={2}>
-                <Grid item xs={3} sm={3}>
-                    <Paper className={classes.paper}><Avatar className={classes.orangeAvatar}>N</Avatar>
-                    </Paper>
-                </Grid>
-                <Grid item xs={5} sm={6}>
-                    <Paper className={classes.paper}>
-                        <p className={classes.text}>PLayer  and Init</p>
-                        <hr/>
-                        <p className={classes.text}>About the player</p>
-                    </Paper>
-                </Grid>
-                <Grid item xs={3} sm={3}>
-                    <Paper className={classes.paper}>
-                        <Grid item>
-                            <IconButton className={classes.button} aria-label="delete">
-                                <DeleteIcon />
-                            </IconButton>
-                        </Grid>
-                    </Paper>
-                </Grid>
-            </Grid>
-            <Grid container spacing={2}>
-                <Grid item xs={3} sm={3}>
-                    <Paper className={classes.paper}><Avatar className={classes.orangeAvatar}>N</Avatar>
-                    </Paper>
-                </Grid>
-                <Grid item xs={5} sm={6}>
-                    <Paper className={classes.paper}>
-                        <p className={classes.text}>PLayer  and Init</p>
-                        <hr/>
-                        <p className={classes.text}>About the player</p>
-                    </Paper>
-                </Grid>
-                <Grid item xs={3} sm={3}>
-                    <Paper className={classes.paper}>
-                        <Grid item>
-                            <IconButton className={classes.button} aria-label="delete">
-                                <DeleteIcon />
-                            </IconButton>
-                        </Grid>
-                    </Paper>
-                </Grid>
-            </Grid>
-            <Grid container spacing={2}>
-                <Grid item xs={3} sm={3}>
-                    <Paper className={classes.paper}><Avatar className={classes.orangeAvatar}>N</Avatar>
-                    </Paper>
-                </Grid>
-                <Grid item xs={5} sm={6}>
-                    <Paper className={classes.paper}>
-                        <p className={classes.text}>PLayer  and Init</p>
-                        <hr/>
-                        <p className={classes.text}>About the player</p>
-                    </Paper>
-                </Grid>
-                <Grid item xs={3} sm={3}>
-                    <Paper className={classes.paper}>
-                        <Grid item>
-                            <IconButton className={classes.button} aria-label="delete">
-                                <DeleteIcon />
-                            </IconButton>
-                        </Grid>
-                    </Paper>
-                </Grid>
-            </Grid>
-            <Grid container spacing={2}>
-                <Grid item xs={3} sm={3}>
-                    <Paper className={classes.paper}><Avatar className={classes.orangeAvatar}>N</Avatar>
-                    </Paper>
-                </Grid>
-                <Grid item xs={5} sm={6}>
-                    <Paper className={classes.paper}>
-                        <p className={classes.text}>PLayer  and Init</p>
-                        <hr/>
-                        <p className={classes.text}>About the player</p>
-                    </Paper>
-                </Grid>
-                <Grid item xs={3} sm={3}>
-                    <Paper className={classes.paper}>
-                        <Grid item>
-                            <IconButton className={classes.button} aria-label="delete">
-                                <DeleteIcon />
-                            </IconButton>
-                        </Grid>
-                    </Paper>
-                </Grid>
-            </Grid>
-            <Grid container spacing={2}>
-                <Grid item xs={3} sm={3}>
-                    <Paper className={classes.paper}><Avatar className={classes.orangeAvatar}>N</Avatar>
-                    </Paper>
-                </Grid>
-                <Grid item xs={5} sm={6}>
-                    <Paper className={classes.paper}>
-                        <p className={classes.text}>PLayer  and Init</p>
-                        <hr/>
-                        <p className={classes.text}>About the player</p>
-                    </Paper>
-                </Grid>
-                <Grid item xs={3} sm={3}>
-                    <Paper className={classes.paper}>
-                        <Grid item>
-                            <IconButton className={classes.button} aria-label="delete">
-                                <DeleteIcon />
-                            </IconButton>
-                        </Grid>
-                    </Paper>
-                </Grid>
-            </Grid>
-            <Grid container spacing={2}>
-                <Grid item xs={3} sm={3}>
-                    <Paper className={classes.paper}><Avatar className={classes.orangeAvatar}>N</Avatar>
-                    </Paper>
-                </Grid>
-                <Grid item xs={5} sm={6}>
-                    <Paper className={classes.paper}>
-                        <p className={classes.text}>PLayer  and Init</p>
-                        <hr/>
-                        <p className={classes.text}>About the player</p>
-                    </Paper>
-                </Grid>
-                <Grid item xs={3} sm={3}>
-                    <Paper className={classes.paper}>
-                        <Grid item>
-                            <IconButton className={classes.button} aria-label="delete">
-                                <DeleteIcon />
-                            </IconButton>
-                        </Grid>
-                    </Paper>
-                </Grid>
-            </Grid>
-            <Grid container spacing={2}>
-                <Grid item xs={3} sm={3}>
-                    <Paper className={classes.paper}><Avatar className={classes.orangeAvatar}>N</Avatar>
-                    </Paper>
-                </Grid>
-                <Grid item xs={5} sm={6}>
-                    <Paper className={classes.paper}>
-                        <p className={classes.text}>PLayer  and Init</p>
-                        <hr/>
-                        <p className={classes.text}>About the player</p>
-                    </Paper>
-                </Grid>
-                <Grid item xs={3} sm={3}>
-                    <Paper className={classes.paper}>
-                        <Grid item>
-                            <IconButton className={classes.button} aria-label="delete">
-                                <DeleteIcon />
-                            </IconButton>
-                        </Grid>
-                    </Paper>
-                </Grid>
-            </Grid>
+        <div className="outerContainer">
+            <div className="container">
+                <h1>!</h1>
+            </div>
         </div>
-            </Container>
-        </React.Fragment>
     );
-}
+};
+
+export default GameLobby;
+
+
+
+
+// import React, { useState, useEffect } from "react";
+// import queryString from 'query-string';
+// import io from 'socket.io-client';
+// import TextContainer from '../TextContainer/TextContainer';
+// import Messages from '../Messages/Messages';
+// import InfoBar from '../InfoBar/InfoBar';
+// import Input from '../Input/Input';
+//
+//
+// let socket = require('socket.io-client')('http://127.0.0.1:5000');
+//
+// const GameLobby = ({ location }) => {
+//     const [dm, setDm] = useState('');
+//     const [name, setName] = useState('');
+//     const [room, setRoom] = useState('');
+//     const [users, setUsers] = useState('');
+//     const [message, setMessage] = useState('');
+//     const [messages, setMessages] = useState([]);
+//     const [] = 'http://localhost:5000';
+//     let room_obj = {};
+//     let loaded = false;
+//
+//
+//
+//     useEffect(() => {
+//         socket = io();
+//         const { name, room, dm } = queryString.parse(location.search);
+//         if (room != null) {
+//             console.log("!");
+//             socket.emit("LoadRoom", room, function(loadedRoom) {
+//                 console.log("Loaded Room", loadedRoom);
+//                 room_obj = loadedRoom;
+//                 // RefreshPlayerList();
+//                 // getMonsters();
+//                 if (!dm) {
+//                     // $dmTools.hide();
+//                 }
+//                 loaded = true;
+//             });
+//         } else {
+//             console.log("Loading Game room failed, handle elegantly");
+//         }
+//     }, [ location.search]);
+//
+//
+//     //
+//     // useEffect(() => {
+//     //     socket.on('message', (message) => {
+//     //         setMessages([...messages, message ]);
+//     //     });
+//     //
+//     //     socket.on('roomData', ({ users }) => {
+//     //         setUsers(users);
+//     //     });
+//     //
+//     //     return () => {
+//     //         socket.emit('disconnect');
+//     //
+//     //         socket.off();
+//     //     }
+//     // }, [messages])
+//     //
+//     // const sendMessage = (event) => {
+//     //     event.preventDefault();
+//     //
+//     //     if(message) {
+//     //         socket.emit('sendMessage', message, () => setMessage(''));
+//     //     }
+//     // };
+//
+//     return (
+//         <div className="outerContainer">
+//             <div className="container">
+//                 <InfoBar room={room} />
+//                 {/*<Messages messages={messages} name={name} />*/}
+//                 {/*<Input message={message} setMessage={setMessage} sendMessage={sendMessage} />*/}
+//             </div>
+//             <TextContainer users={users}/>
+//         </div>
+//     );
+// };
+//
+// export default GameLobby;
+//
+//
+//
+//
+//
+//
+//
+//

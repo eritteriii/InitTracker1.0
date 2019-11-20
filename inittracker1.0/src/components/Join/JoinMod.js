@@ -3,13 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import BottomNavigation from "@material-ui/core/BottomNavigation/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-// import SmsIcon from '@material-ui/icons/Sms';
 import {Link} from "react-router-dom";
 import './Join.css';
 import ChatIcon from '@material-ui/icons/Chat';
-import ListItemText from "@material-ui/core/ListItemText";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 

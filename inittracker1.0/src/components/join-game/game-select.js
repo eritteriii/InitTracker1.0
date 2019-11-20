@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,12 @@ import Input from '@material-ui/core/Input';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Fab from "@material-ui/core/Fab";
+import io from "socket.io-client";
+import MenuItem from '@material-ui/core/MenuItem';
+import { useHistory } from "react-router-dom";
+
+
+let socket;
 
 
 
@@ -46,25 +52,44 @@ const useStyles = makeStyles(theme => ({
 
 
 
-
-
-
-
 export default function GameSelect() {
+    const [init, setInitiative] = useState('');
+    const [name, setName] = useState('');
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-    const [age, setAge] = React.useState('');
+    const [selectedRoom, setSelectedRoom] = React.useState('');
+    const ENDPOINT = 'http://localhost:5000/';
+    let history = useHistory();
+
+    let roomList = [];
+    socket = io(ENDPOINT);
+    socket.emit("GetRooms", function (roomArray) {
+        roomList = roomArray.map((room, index) => {
+            return (
+                <option key={index} value={room.id}>
+                    {room.name}
+                </option>
+            );
+        });
+        console.log(roomArray)
+    });
+
+    let selectedOption;
 
     const handleChange = event => {
-        setAge(Number(event.target.value) || '');
+        setSelectedRoom(Number(event.target.value) || '');
     };
 
     const handleClickOpen = () => {
-        setOpen(true);
+            setOpen(true);
     };
-
     const handleClose = () => {
         setOpen(false);
+    };
+    const handleJoin = () => {
+        // history.push(`/game-lobby?name=${name}&roomid=${selectedRoom}&init=${init}&dm=false`);
+        history.push(`/game-lobby?name=${name}&roomid=1&init=${init}&dm=false`);
+
     };
 
     return (
@@ -75,6 +100,7 @@ export default function GameSelect() {
         <div className={classes.container}>
             <div>
                 <TextField
+                    onChange={(event) => setName(event.target.value)}
                     id="outlined-full-width"
                     label="Name"
                     style={{ margin: 8 }}
@@ -88,6 +114,7 @@ export default function GameSelect() {
 
                 />
                 <TextField
+                    onChange={(event) => setInitiative(event.target.value)}
                     id="outlined-full-width"
                     label="Initiative"
                     style={{ margin: 8 }}
@@ -114,12 +141,12 @@ export default function GameSelect() {
                                     <InputLabel htmlFor="demo-dialog-native">Game Name</InputLabel>
                                     <Select
                                         native
-                                        value={age}
+                                        value={selectedRoom}
                                         onChange={handleChange}
                                         input={<Input id="demo-dialog-native" />}
                                     >
                                         <option value="" />
-                                        <option value={10}>...</option>
+                                        {roomList}
                                     </Select>
                                 </FormControl>
                             </form>
@@ -128,7 +155,7 @@ export default function GameSelect() {
                             <Button onClick={handleClose} color="primary">
                                 Cancel
                             </Button>
-                            <Button onClick={handleClose} color="primary">
+                            <Button onClick={handleJoin} color="primary">
                                 Join Game!
                             </Button>
                         </DialogActions>
