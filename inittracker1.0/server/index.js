@@ -17,10 +17,10 @@ const  SELECT_ALL_DM_MONSTERS_QUERY = 'SELECT * FROM dmmonsters';
 
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'init_tracker'
+  host: 'us-cdbr-iron-east-05.cleardb.net',
+  user: 'b2a25b050ae62c',
+  password: '587949a3ffb5b57',
+  database: 'heroku_58566ad6018579b'
 });
 
 connection.connect(err => {
