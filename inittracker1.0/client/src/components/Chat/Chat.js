@@ -49,7 +49,7 @@ const Chat = (props) => {
 	const [users, setUsers] = useState('');
 	const [message, setMessage] = useState('');
 	const [messages, setMessages] = useState([]);
-	const ENDPOINT = 'http://localhost:5000/';
+	const ENDPOINT = 'https://inittracker1-0.herokuapp.com/';
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
