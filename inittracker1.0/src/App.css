@@ -1,7 +1,82 @@
-.App {
-  text-align: center;
+body {
+  text-align: center !important;
+  background-image: url("paper-bg.jpg");
+  width: 100vw;
+  font-family: ff-scala-sans-pro, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.makeStyles-container-1{
+  justify-content: center;
+}
+.makeStyles-root-288{
+  width: 100vw!important;
 }
 
+.MuiBottomNavigation-root{
+  background-color: rgba(0, 0, 128, 0)!important;
+}
+.bot{
+  position: fixed!important;
+  bottom: 0!important;
+}
+a{
+  color: #822000!important;
+}
+.MuiFormLabel-root.Mui-focused{
+  color: #822000!important;
+}
+
+#navigation,.Navbar.Toggle {
+  background-image: url("paper-bg.jpg");
+  color: #822000 !important;
+  padding: 0.5rem .5rem!important;
+
+}
+.navbar{
+  justify-content: center!important;
+}
+.navbar-light .navbar-toggler-icon {
+  background-image: url("reddragon.png")!important;
+  width: 3.6em!important;
+  height: 2.5em!important;
+}
+.navbar-light .navbar-brand{
+  color: #822000 !important;
+  margin: 0!important;
+}
+.navbar-light .navbar-nav .nav-link{
+  color: #822000 !important;
+}
+.navbar-toggler {
+  border-color: rgba(130, 32, 0, .0)!important;
+  box-shadow: none;
+  padding: 0!important;
+}
+
+#d-toggle{
+  justify-content: left!important;
+}
+.banner {
+  font-family: mrs-eaves-roman-small-caps, sans-serif;
+  padding: 15px;
+  font-weight: 600;
+  font-style: normal;
+  color: #822000;
+  font-size: 2.5rem !important;
+}
+#play-btn {
+  background-color: #822000;
+}
+
+#dm-btn {
+  background-color: #822000;
+}
+
+.profilePix{
+  border-radius: 50%;
+  height: 6vh!important;
+}
 .App-logo {
   height: 40vmin;
 }
@@ -19,4 +94,11 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .MuiBottomNavigation-root{
+    background-color: darkgray!important;
+  }
 }
