@@ -4,7 +4,6 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import MenuItem from "@material-ui/core/MenuItem";
-import MonsterList from "./Db-List";
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import AppBar from '@material-ui/core/AppBar';
@@ -13,6 +12,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import useTheme from "@material-ui/core/styles/useTheme";
+import PlayerMonsterList from "../PlayerMonsterList";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -44,7 +44,6 @@ function a11yProps(index) {
     };
 }
 
-
 const useStyles = makeStyles(theme => ({
     modal: {
         display: 'flex',
@@ -63,11 +62,32 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function DmTools({user, updateInit, moveUser, createMonster, updateMortality}) {
+export default function DmTools({user, createMonster}) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
+    const [monsters, setMonsters] = React.useState([]);
+    const [newMonster, setNewMonster] = React.useState("");
+
+    const handleMonsterInputChange = (e) => {
+        setNewMonster(e.target.value);
+    };
+
+    const handleMonsterSubmit = () => {
+        console.log("Submitting monster to DB", newMonster);
+        let tempMonsters = monsters;
+        tempMonsters.push(newMonster);
+        setMonsters(tempMonsters);
+        fetch('http://localhost:5000/monsters/add/?monster_name=' + newMonster)
+            .then(response => response.json())
+            .then(response => {console.log("Monster add response", response)})
+            .catch(err => console.error(err));
+        fetch('http://localhost:5000/monsters')
+            .then(response => response.json())
+            .then(response => setMonsters(response.data))
+            .catch(err => console.error(err))
+    };
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -78,6 +98,12 @@ export default function DmTools({user, updateInit, moveUser, createMonster, upda
     };
 
     const handleOpen = () => {
+        if (monsters.length <= 0) {
+            fetch('http://localhost:5000/monsters')
+                .then(response => response.json())
+                .then(response => setMonsters(response.data))
+                .catch(err => console.error(err))
+        }
         setOpen(true);
     };
 
@@ -117,9 +143,9 @@ export default function DmTools({user, updateInit, moveUser, createMonster, upda
                                         variant="fullWidth"
                                         aria-label="full width tabs example"
                                     >
-                                        <Tab label="Item One" {...a11yProps(0)}
+                                        <Tab label="Preset Monsters" {...a11yProps(0)}
                                         />
-                                        <Tab label="Item Two" {...a11yProps(1)} />
+                                        <Tab label="Custom Monsters" {...a11yProps(1)} />
                                     </Tabs>
                                 </AppBar>
                                 <SwipeableViews
@@ -128,26 +154,16 @@ export default function DmTools({user, updateInit, moveUser, createMonster, upda
                                     onChangeIndex={handleChangeIndex}
                                 >
                                     <TabPanel value={value} index={0} dir={theme.direction}>
-                                        <MonsterList/>
+                                        {/*TODO: filter functionality*/}
+                                        <PlayerMonsterList createMonster={createMonster} monsters={monsters}/>
                                     </TabPanel>
                                     <TabPanel value={value} index={1} dir={theme.direction}>
-                                        <MonsterList/>
+                                        {/*TODO: add new monster functionality*/}
+                                        <input onChange={handleMonsterInputChange} /><button onClick={handleMonsterSubmit}>Add</button>
+                                        <PlayerMonsterList createMonster={createMonster} monsters={monsters}/>
                                     </TabPanel>
                                 </SwipeableViews>
                             </div>
-
-                            {/*<button onClick={e => updateInit(e, 1, 3)}>*/}
-                            {/*    Update Init of user at index 1 to 3*/}
-                            {/*</button><br/>*/}
-                            {/*<button onClick={e => moveUser(e, 1, 2)}>*/}
-                            {/*    Move player at index 1 to index 2*/}
-                            {/*</button><br/>*/}
-                            {/*<button onClick={e => createMonster(e, "Dragon")}>*/}
-                            {/*    Create Monster "Dragon"*/}
-                            {/*</button><br/>*/}
-                            {/*<button onClick={e => updateMortality(e, 1)}>*/}
-                            {/*    Toggle mortality of user at index 1*/}
-                            {/*</button><br/>*/}
                         </div>
                     </div>
                 </Fade>

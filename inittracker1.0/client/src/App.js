@@ -57,9 +57,9 @@ class App extends React.Component {
         return (
             <div>
                 <Router>
-                    <Route path="/" render={(props) =>  <Landing {...props} isSignedIn={this.state.isSignedIn} />} />
-                    <Route path="/join" render={(props) =>  <Join {...props} isSignedIn={this.state.isSignedIn} />} />
-                    <Route path="/chat" render={(props) =>  <Chat {...props} isSignedIn={this.state.isSignedIn} />} />
+                    <Route path="/" render={(props) => <Landing {...props} isSignedIn={this.state.isSignedIn} />} />
+                    <Route path="/join" render={(props) => <Join {...props} isSignedIn={this.state.isSignedIn} />} />
+                    <Route path="/chat" render={(props) => <Chat {...props} isSignedIn={this.state.isSignedIn} />} />
                 </Router>
                 <div>
                     {!this.state.isSignedIn ?  (

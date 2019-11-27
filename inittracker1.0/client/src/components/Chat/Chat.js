@@ -19,8 +19,6 @@ import Input from '../Input/Input';
 import './Chat.css';
 import closeIcon from "../../icons/closeIcon.png";
 import firebase from "firebase";
-import {Redirect} from "react-router";
-import Link from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -45,7 +43,7 @@ const Chat = (props) => {
 	const [name, setName] = useState('');
 	const [room, setRoom] = useState('');
 	const [user, setUser] = useState('');
-	const [tempUser, setTempUser] = useState('');
+	const [isDm, setIsDm] = useState('');
 	const [users, setUsers] = useState('');
 	const [message, setMessage] = useState('');
 	const [messages, setMessages] = useState([]);
@@ -97,6 +95,7 @@ const Chat = (props) => {
 
 		setRoom(room);
 		setName(name);
+
 		const userProfilePhoto = firebase.auth().currentUser.photoURL;
 		const userDisplayName = firebase.auth().currentUser.displayName;
 
@@ -105,7 +104,8 @@ const Chat = (props) => {
 				alert(error);
 			}
 			setUser(user);
-			console.log("Your user object", user);
+			setIsDm(user.isDm);
+			console.log("Your user object", user, "Is DM", user.isDm);
 		});
 	}, [ENDPOINT, props.location.search]);
 
@@ -127,28 +127,38 @@ const Chat = (props) => {
 		});
 	});
 
-	const moveUser = (event, from, to) => {
-		event.preventDefault();
-		if (user.isDm) {
+	const moveUser = (evt) => {
+		const from = evt.oldIndex + 1;
+		const to = evt.newIndex + 1;
+		const user = users[from];
+		if (isDm) {
 			socket.emit('moveUser', {user, from, to}, (tempUser) => {
 				console.log("Moved user", tempUser);
 			});
 		}
 	};
 
-	const updateInit = (event, userIndex, init) => {
-		event.preventDefault();
-		if (user.isDm && !users[userIndex].isMonster) {
-			users[userIndex].init = init;
-			let tempUser = users[userIndex];
+	const endTurn = (index) => {
+		const from = index;
+		const to = users.length;
+		const user = users[from];
+		socket.emit('moveUser', {user, from, to}, (tempUser) => {
+			console.log("Moved user", tempUser);
+		});
+	};
+
+	const updateInit = (e) => {
+		if (e.target.value) {
+			user.init = e.target.value;
+			let tempUser = user;
 			socket.emit('updateUserInit', {tempUser}, (tempUser) => {
 				console.log("Updated user", tempUser);
 			});
 		}
 	};
 
-	const createMonster = (event, monsterName) => {
-		const isMonster = true;
+	function createMonster(monsterName) {
+		let isMonster = true;
 		socket.emit('createMonster', {monsterName, room, isMonster}, (user, error) => {
 			if (error) {
 				alert(error);
@@ -157,8 +167,7 @@ const Chat = (props) => {
 		});
 	};
 
-	const updateMortality = (event, userIndex) => {
-		event.preventDefault();
+	const updateMortality = (userIndex) => {
 		if (user.isDm) {
 			users[userIndex].isAlive = !users[userIndex].isAlive;
 			let tempUser = users[userIndex];
@@ -235,7 +244,7 @@ const Chat = (props) => {
 									open={open}
 									onClose={handleClose}
 								>
-									<DmTools user={user} users={users} room={room} moveUser={moveUser} updateInit={updateInit} createMonster={createMonster} updateMortality={updateMortality}/>
+									<DmTools user={user} createMonster={createMonster}/>
 									<a href="/"><img src={closeIcon} alt="close icon" /><MenuItem onClick={handleClose}>Leave Game</MenuItem></a>
 									<MenuItem onClick={handleSignOut}>Log Out</MenuItem>
 								</Menu>
@@ -263,7 +272,10 @@ const Chat = (props) => {
 					</SwipeableDrawer>
 				</div>
 			</div>
-			<TextContainer user={user} users={users} room={room} moveUser={moveUser} updateInit={updateInit} createMonster={createMonster} updateMortality={updateMortality}/>
+			{!isDm ? (
+				<input placeholder={"Update Initiative"} onChange={ updateInit }/>
+			): null}
+			<TextContainer dm={isDm} users={users} room={room} moveUser={moveUser} endTurn={endTurn} updateInit={updateInit} updateMortality={updateMortality}/>
 		</div>
 	);
 };

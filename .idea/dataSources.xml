@@ -15,5 +15,19 @@
         <property name="yearIsDateType" value="false" />
       </driver-properties>
     </data-source>
+    <data-source source="LOCAL" name="heroku_8e3b101c72ecd33@us-cdbr-iron-east-05.cleardb.net" uuid="6744276c-3984-47dc-a536-5a090c37ecab">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://us-cdbr-iron-east-05.cleardb.net:3306/heroku_8e3b101c72ecd33</jdbc-url>
+      <driver-properties>
+        <property name="autoReconnect" value="true" />
+        <property name="zeroDateTimeBehavior" value="CONVERT_TO_NULL" />
+        <property name="tinyInt1isBit" value="false" />
+        <property name="characterEncoding" value="utf8" />
+        <property name="characterSetResults" value="utf8" />
+        <property name="yearIsDateType" value="false" />
+      </driver-properties>
+    </data-source>
   </component>
 </project>

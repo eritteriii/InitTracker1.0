@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { FixedSizeList } from 'react-window';
+import PlayerMonsterList from "../PlayerMonsterList";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -19,9 +20,7 @@ function renderRow(props) {
     const { index, style } = props;
 
     return (
-        <ListItem button style={style} key={index}>
-            <ListItemText primary={`Item ${index + 1}`} />
-        </ListItem>
+        <PlayerMonsterList/>
     );
 }
 
@@ -30,18 +29,18 @@ renderRow.propTypes = {
     style: PropTypes.object.isRequired,
 };
 
-
-
-export default function MonsterList() {
+export default function MonsterList(panel) {
     const classes = useStyles();
-
-
     return (
         <div className={classes.root}>
-            <h1>Add A Monster!</h1>
-            <FixedSizeList height={400} width={360} itemSize={46} itemCount={200}>
-                {renderRow}
-            </FixedSizeList>
+            <h1>Select A Monster</h1>
+            <PlayerMonsterList/>
         </div>
     );
 }
+{/*<ListItem button style={style} key={index}>*/}
+{/*    <ListItemText primary={`Item ${index + 1}`} />*/}
+{/*</ListItem>*/}
+{/*<FixedSizeList height={400} width={360} itemSize={46} itemCount={200}>*/}
+{/*    {renderRow}*/}
+{/*</FixedSizeList>*/}
