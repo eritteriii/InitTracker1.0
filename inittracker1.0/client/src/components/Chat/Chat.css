@@ -1,0 +1,77 @@
+.outerContainer {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 28px;
+  letter-spacing: -1.4px;
+  word-spacing: -1px;
+  color: #000000;
+  font-weight: 700;
+  text-decoration: none solid rgb(68, 68, 68);
+  font-style: italic;
+  font-variant: normal;
+  text-transform: capitalize;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.profilePix{
+height: 35px;
+  border-radius: 50%;
+}
+
+.banner {
+  text-shadow: #ccc 0 1px 0, #c9c9c9 0 2px 0, #bbb 0 3px 0, #b9b9b9 0 4px 0, #aaa 0 5px 0,rgba(0,0,0,.1) 0 6px 1px, rgba(0,0,0,.1) 0 0 5px, rgba(0,0,0,.3) 0 1px 3px, rgba(0,0,0,.15) 0 3px 5px, rgba(0,0,0,.2) 0 5px 10px, rgba(0,0,0,.2) 0 10px 10px, rgba(0,0,0,.1) 0 20px 20px;
+  text-align: center;
+  font-family: mrs-eaves-roman-small-caps, sans-serif;
+  padding: 15px;
+  font-weight: 600;
+  font-style: normal;
+  color: #822000;
+  font-size: 1.8em !important;
+}
+
+hr{
+  width: 50%;
+}
+
+.container {
+  flex-direction: column;
+  justify-content: space-between;
+  background: #FFFFFF;
+  border-radius: 8px;
+  height: 60%;
+  width: 35%;
+}
+
+a{
+  color: black!important;
+}
+
+.MuiAppBar-colorPrimary{
+  background-color: rgba(0,0,0, 0)!important;
+  border: none!important;
+  box-shadow: none!important;
+color: #822000!important;
+}
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .outerContainer {
+    height: 100%;
+  }
+
+  .container {
+    width: 100%;
+    height: 100%;
+  }
+}
+.hostBanner{
+  text-align: center;
+  margin: 10px;
+}
+
+@media (min-width: 480px) and (max-width: 1200px) {
+  .container {
+    width: 60%;
+  }
+}

@@ -1,0 +1,74 @@
+.textContainer {
+
+  display: flex;
+  flex-direction: column;
+  color: black;
+  height: 100vh;
+  justify-content: space-between;
+}
+
+
+.activeContainer {
+
+justify-content: center;
+}
+.action{
+  margin-left: auto ;
+}
+.buttons{
+  text-align: right;
+}
+.lifeImg{
+  width: 100px;
+  height: 100px;
+}
+
+.activeItem {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 28px;
+  letter-spacing: -1.4px;
+  word-spacing: -1px;
+  color: #000000;
+  font-weight: 700;
+  text-decoration: none solid rgb(68, 68, 68);
+  font-style: italic;
+  font-variant: normal;
+  text-transform: capitalize;
+  border: 13px ridge #822000!important;
+  -webkit-box-shadow: -53px 44px 31px -11px rgba(0,0,0,0.6) !important;
+  -moz-box-shadow: -53px 44px 31px -11px rgba(0,0,0,0.6)!important;
+  box-shadow: -53px 44px 31px -11px rgba(0,0,0,0.6)!important;
+  background-color: rgba(0,0,0, 0)!important;
+  margin: 20px;
+  padding: 10px;
+  display: block;
+  align-items: center;
+  width: 80%;
+  margin-left: auto ;
+  margin-right: auto ;
+
+}
+
+
+
+.activeContainer img {
+  padding-left: 10px;
+}
+
+.textContainer h1 {
+  margin-bottom: 0px;
+}
+
+@media (max-width: 600px)  {
+  .activeItem {
+    width: 100%!important;
+    margin: 0;
+    margin-top: 10px!important;
+
+  }
+  .MuiPaper-elevation1{
+    -webkit-box-shadow: -53px 44px 31px -11px rgba(0,0,0,0.6);
+    -moz-box-shadow: -53px 44px 31px -11px rgba(0,0,0,0.6);
+    box-shadow: -53px 44px 31px -11px rgba(0,0,0,0.6);
+  }
+}
