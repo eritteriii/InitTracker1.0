@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import useTheme from "@material-ui/core/styles/useTheme";
 import PlayerMonsterList from "../PlayerMonsterList";
+import StaticMonsterList from  '../StaticMonsterList';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -68,6 +69,7 @@ export default function DmTools({user, createMonster}) {
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
     const [monsters, setMonsters] = React.useState([]);
+    const [dmmonsters, setDmMonsters] = React.useState([]);
     const [newMonster, setNewMonster] = React.useState("");
 
     const handleMonsterInputChange = (e) => {
@@ -155,7 +157,7 @@ export default function DmTools({user, createMonster}) {
                                 >
                                     <TabPanel value={value} index={0} dir={theme.direction}>
                                         {/*TODO: filter functionality*/}
-                                        <PlayerMonsterList createMonster={createMonster} monsters={monsters}/>
+                                        <StaticMonsterList createMonster={createMonster} dmmonsters={dmmonsters}/>
                                     </TabPanel>
                                     <TabPanel value={value} index={1} dir={theme.direction}>
                                         {/*TODO: add new monster functionality*/}

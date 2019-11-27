@@ -17,10 +17,10 @@ const  SELECT_ALL_DM_MONSTERS_QUERY = 'SELECT * FROM dmmonsters';
 
 
 const connection = mysql.createConnection({
-  host: 'us-cdbr-iron-east-05.cleardb.net',
-  user: 'b61eb47ce33739',
-  password: '4fd72c99',
-  database: 'heroku_8e3b101c72ecd33'
+  host: '127.0.0.1',
+  user: 'root',
+  password: 'password',
+  database: 'init_tracker'
 });
 
 connection.connect(err => {
@@ -37,6 +37,17 @@ app.use(router);
 
 app.get('/monsters', (req, res) =>{
   connection.query(SELECT_ALL_MONSTERS_QUERY, SELECT_ALL_DM_MONSTERS_QUERY, (err, results) =>{
+    if (err){
+      return res.send(err);
+    }else {
+      return res.json({
+        data: results
+      })
+    }
+  })
+});
+app.get('/monsters/dm', (req, res) =>{
+  connection.query(SELECT_ALL_DM_MONSTERS_QUERY, (err, results) =>{
     if (err){
       return res.send(err);
     }else {
