@@ -11,16 +11,19 @@
   text-transform: capitalize;
   justify-content: center;
   align-items: center;
-
 }
 
-.profilePix{
-height: 35px;
+.profilePix {
+  height: 35px;
   border-radius: 50%;
 }
 
 .banner {
-  text-shadow: #ccc 0 1px 0, #c9c9c9 0 2px 0, #bbb 0 3px 0, #b9b9b9 0 4px 0, #aaa 0 5px 0,rgba(0,0,0,.1) 0 6px 1px, rgba(0,0,0,.1) 0 0 5px, rgba(0,0,0,.3) 0 1px 3px, rgba(0,0,0,.15) 0 3px 5px, rgba(0,0,0,.2) 0 5px 10px, rgba(0,0,0,.2) 0 10px 10px, rgba(0,0,0,.1) 0 20px 20px;
+  text-shadow: #ccc 0 1px 0, #c9c9c9 0 2px 0, #bbb 0 3px 0, #b9b9b9 0 4px 0,
+    #aaa 0 5px 0, rgba(0, 0, 0, 0.1) 0 6px 1px, rgba(0, 0, 0, 0.1) 0 0 5px,
+    rgba(0, 0, 0, 0.3) 0 1px 3px, rgba(0, 0, 0, 0.15) 0 3px 5px,
+    rgba(0, 0, 0, 0.2) 0 5px 10px, rgba(0, 0, 0, 0.2) 0 10px 10px,
+    rgba(0, 0, 0, 0.1) 0 20px 20px;
   text-align: center;
   font-family: mrs-eaves-roman-small-caps, sans-serif;
   padding: 15px;
@@ -30,30 +33,29 @@ height: 35px;
   font-size: 1.8em !important;
 }
 
-hr{
+hr {
   width: 50%;
 }
 
 .container {
   flex-direction: column;
   justify-content: space-between;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 8px;
   height: 60%;
   width: 35%;
 }
 
-a{
-  color: black!important;
+a {
+  color: black !important;
 }
 
-.MuiAppBar-colorPrimary{
-  background-color: rgba(0,0,0, 0)!important;
-  border: none!important;
-  box-shadow: none!important;
-color: #822000!important;
+.MuiAppBar-colorPrimary {
+  background-color: rgba(0, 0, 0, 0) !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #822000 !important;
 }
-
 
 @media (min-width: 320px) and (max-width: 480px) {
   .outerContainer {
@@ -65,7 +67,7 @@ color: #822000!important;
     height: 100%;
   }
 }
-.hostBanner{
+.hostBanner {
   text-align: center;
   margin: 10px;
 }
